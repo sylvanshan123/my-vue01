@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="lib/vue.min.js"></script>
+    <link rel="stylesheet" href="lib/bootstrap.css">
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="获取元素" @click="getElement">
+        <h3 id="myh3" ref="myh3">哈哈哈，今天天气还不错</h3>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data:{
+
+            },
+            methods: {
+                getElement(){
+                    // ref 的英文单词是【reference】, 值类型 和 引用类型   【referenceError】
+                    console.log(this.$refs.myh3.innerText)
+                }
+            }
+        });
+    </script>
+</body>
+</html>

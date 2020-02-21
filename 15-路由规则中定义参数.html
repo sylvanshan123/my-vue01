@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="lib/vue.min.js"></script>
+    <script src="lib/vue-router-3.1.5.js"></script>
+    <link rel="stylesheet" href="lib/bootstrap.css">
+</head>
+<body>
+    <div id="app">
+
+        <!-- 如果在路由中使用 查询字符串，给路由传递参数，则 不需要-修改 路由规则的 path 属性 -->
+        <router-link to="/login?id=10&name=sk">登录</router-link>
+        <router-link to="/register">注册</router-link>
+
+        <router-view></router-view>
+    </div>
+
+    <script>
+        var login = {
+            template: '<h1>登录组件  --- {{$route.query.id}}</h1>',
+            created() {  //组件的生命周期钩子函数
+                console.log(this.$route)
+                console.log(this.$route.query.id + '-' +this.$route.query.name)
+            }
+        }
+
+        var register = {
+            template: '<h1>注册组件</h1>'
+        }
+        var routerObj = new VueRouter({
+            routes:[ //路由匹配规则
+                {path: '/login', component: login},
+                {path: '/register', component: register}
+            ],
+            linkActiveClass: 'myActive'
+        })
+
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            router: routerObj  //将路由规则对象，注册到vm实例上，用来监听 URL 地址的变化，然后展示对应的组件
+        });
+    </script>
+</body>
+</html>

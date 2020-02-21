@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="lib/vue.min.js"></script>
+</head>
+<body>
+    <!--在被控制的 #app 外面，使用 template 元素，定义组件的HTML模板结构-->
+    <div id="app">
+        <mycomp1></mycomp1>
+        <login></login>
+    </div>
+
+    <template id="tmp1">
+        <div>
+            <h1>这是通过 template 元素，在外部定义的组件结构，这个方式，有代码的只能提示和高亮</h1>
+            <h4>不错，好用</h4>
+        </div>
+    </template>
+
+    <template id="login">
+        <h1>这是私有的login组件</h1>
+    </template>
+
+    <script>
+        //注意：不论是哪种形式创建出来的组件，组件的 template属性指向的模板内容，必须有且只能有唯一的一个根元素
+        Vue.component('mycomp1',{
+            template: '#tmp1'
+        })
+
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            components:{
+                login:{
+                    template: '#login'
+                }
+            }
+        });
+    </script>
+</body>
+</html>
